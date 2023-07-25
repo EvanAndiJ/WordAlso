@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/EvanAndiJ/WordAlso.git/static/css/main.4fcc5fa0.css",
+    "main.js": "/EvanAndiJ/WordAlso.git/static/js/main.5032e92f.js",
+    "static/js/787.899534d7.chunk.js": "/EvanAndiJ/WordAlso.git/static/js/787.899534d7.chunk.js",
+    "index.html": "/EvanAndiJ/WordAlso.git/index.html",
+    "main.4fcc5fa0.css.map": "/EvanAndiJ/WordAlso.git/static/css/main.4fcc5fa0.css.map",
+    "main.5032e92f.js.map": "/EvanAndiJ/WordAlso.git/static/js/main.5032e92f.js.map",
+    "787.899534d7.chunk.js.map": "/EvanAndiJ/WordAlso.git/static/js/787.899534d7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4fcc5fa0.css",
+    "static/js/main.5032e92f.js"
+  ]
+}
