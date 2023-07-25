@@ -1,7 +1,7 @@
 {
   "name": "wordalso",
   "version": "0.1.0",
-  "homepage": "https://evanandij.github.io/WordAlso",
+  "homepage": "https://evanandij.github.io/wordalso",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
