@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="style.css" rel="stylesheet" />
+    <script defer  src="main.js" charset="utf-8"></script>
+    
+  </head>
+  <body>
+    <div id='gameBoard'>
+      <div class='topBar'>
+        <div class='title'>Wordalso</div>
+        <button class='help hl' onclick="openWindow('howTo')" >?</button>
+        <button class='help hr' onclick="openWindow('settingsBox')">&#10033;</button>
+      </div>
+      <div id="guessBox"></div>
+      <div id="keyboard">
+        <div class='keyrow'>
+          <button onclick='typey("Q")' id="Q">Q</button>
+          <button onclick='typey("W")' id="W">W</button>
+          <button onclick='typey("E")' id="E">E</button>
+          <button onclick='typey("R")' id="R">R</button>
+          <button onclick='typey("T")' id="T">T</button>
+          <button onclick='typey("Y")' id="Y">Y</button>
+          <button onclick='typey("U")' id="U">U</button>
+          <button onclick='typey("I")' id="I">I</button>
+          <button onclick='typey("O")' id="O">O</button>
+          <button onclick='typey("P")' id="P">P</button>
+        </div>
+      <div class='keyrow'>
+        <button onclick='typey("A")' id="A">A</button>
+          <button onclick='typey("S")' id="S">S</button>
+          <button onclick='typey("D")' id="D">D</button>
+          <button onclick='typey("F")' id="F">F</button>
+          <button onclick='typey("G")' id="G">G</button>
+          <button onclick='typey("H")' id="H">H</button>
+          <button onclick='typey("J")' id="J">J</button>
+          <button onclick='typey("K")' id="K">K</button>
+          <button onclick='typey("L")' id="L">L</button>
+        </div>
+      <div class='keyrow'>
+        <button class='sidekey' id=" id= identer" onclick="checkWord()">Enter</button>
+          <button onclick='typey("Z")' id="Z">Z</button>
+          <button onclick='typey("X")' id="X">X</button>
+          <button onclick='typey("C")' id="C">C</button>
+          <button onclick='typey("V")' id="V">V</button>
+          <button onclick='typey("B")' id="B">B</button>
+          <button onclick='typey("N")' id="N">N</button>
+          <button onclick='typey("M")' id="M">M</button>
+          <button class='sidekey' id="back" onclick="backspace()">Back</button>
+        </div>
+      </div>
+      <div class="modalBG" id='modalBG'>
+        <div class='modalBox' id="howTo">
+          <div id='instruct'>
+            Guess the random wordle in 6 tries <br>
+            Each guess must be a valid word. Press Enter to submit <br>
+            Tiles will change colors showing how close your guess is <br><br>
+          </div>
+          <div id='examples'>Examples:
+            <div class='guessLine' id="ex0">
+              <div class='tileCon' id='ex0-0'>
+                <div class='tileP exTile'  id='ex0-0p'>
+                  <div class="tileF" id='ex0-0f'>H</div>
+                  <div class="tileB" id='ex0-0b'>H</div>
+                </div>
+              </div>
+              <div class='tileCon exTile' id='ex0-1'>E</div>
+              <div class='tileCon exTile' id='ex0-2'>A</div>
+              <div class='tileCon exTile' id='ex0-3'>R</div>
+              <div class='tileCon exTile' id='ex0-4'>T</div>
+            </div>
+            The H is in the word and in the correct spot. <br><br>
+            <div class='guessLine' id="ex1">
+              <div class='tileCon exTile' id='ex1-1'>C</div>
+              <div class='tileCon exTile' id='ex1-2'>H</div>
+              <div class='tileCon' id='ex1-0'>
+                <div class='tileP'  id='ex1-0p'>
+                  <div class="tileF" id='ex1-0f'>A</div>
+                  <div class="tileB" id='ex1-0b'>A</div>
+                </div>
+              </div>
+              <div class='tileCon exTile' id='ex1-3'>R</div>
+              <div class='tileCon exTile' id='ex1-4'>T</div>
+            </div>
+            The A is in the word, but not in the correct spot. <br><br>
+            <div class='guessLine' id="ex2">
+              <div class='tileCon exTile'>A</div>
+              <div class='tileCon exTile'>P</div>
+              <div class='tileCon exTile'>A</div>
+              <div class='tileCon exTile'>R</div>
+              <div class='tileCon' id='ex2-0'>
+                <div class='tileP'  id='ex2-0p'>
+                  <div class="tileF" id='ex2-0f'>T</div>
+                  <div class="tileB" id='ex2-0b'>T</div>
+                </div>
+              </div>
+            </div>
+            The T is not in the word. <br>
+          </div>
+          <button class='close' onclick="closeWindow('howTo')">&#10006;</button>
+        </div>
+        <div class='modalBox' id="winBox">
+          You did it! <br>
+          <div class='statBar' id='winStats'></div>
+          <button onclick="closeWindow('winBox')">Yay</button>
+          <button onclick="closeWindow('winBox'); gameReset()">New Word</button>
+          <button class='close' onclick="closeWindow('winBox')">&#10006;</button>
+        </div>
+        <div class='modalBox' id="loseBox">
+          Oh no! The wordle was <span id='reveal'></span> <br>
+          <div class='statBar' id='loseStats'></div>
+          <button onclick="closeWindow('loseBox')">Boo</button>
+          <button onclick="closeWindow('winBox'); gameReset()">New Word</button>
+          <button class='close' onclick="closeWindow('loseBox')">&#10006;</button>
+        </div>
+        <div class='modalBox' id="statBox">
+          <div class='statBar'>
+            <div>
+              <div>0</div>
+              <div>played</div>
+            </div>
+            <div>
+              <div>0</div>
+              <div>win %</div>
+            </div>
+            <div>
+              <div>0</div>
+              <div>current streak</div>
+            </div>
+            <div>
+              <div>0</div>
+              <div>longest streak</div>
+            </div>
+          </div>
+          <button onclick="closeWindow('statBox')">close</button>
+        </div>
+        <div class='modalBox' id="settingsBox">
+          STATISTICS <br>
+          <div class='statBar' id='settStats'></div>
+          GUESS DISTRIBUTION
+          <div class='graphBox' id='settingsGraph'></div> <br>
+          <button onclick='closeWindow("settingsBox"); gameReset()'>New Word</button>
+          <button class='close' onclick="closeWindow('settingsBox')">&#10006;</button>
+        </div>
+      </div>
+    </div>
+    <!-- <div id='devBox'>
+      <button onclick='showMe()'>see</button>
+      <button onclick='saver()'>saver</button>
+      <button onclick='testLoad()'>loader</button>
+      <button onclick='remover()'>remover</button>
+      <button onclick='getWord()'>new word</button>
+      <button onclick='sendStats()'>stats Save</button>
+      <button onclick='getStats()'>stats Get</button>
+    </div> -->
+  </body>
+</html>

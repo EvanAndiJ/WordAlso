@@ -1,38 +1,339 @@
+:root {
+  --mainFont: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+.check {
+  border: 1px solid #e26060;
+}
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  min-width: 350px;
+  color: white;
+  background-color: #000;
+  position: relative;
+}
+.App-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(5px + 2vmin);
+  font-family: var(--mainFont);
+}
+.headerButtonsDiv {
+  position: absolute;
+  top: 1;
+  right: 0;
+}
+.headerButtons {
+  padding: 0;
+  border: none;
+  background-color: #00000000;
+
+}
+.headerButtons img{
+  margin: .5rem;
+  transform: scale(1.35);
+}
+hr {
+  margin: 0 0 .25rem 0;
+  border-color:#a3a3a3;
+}
+.title {
+  margin: .35rem
+}
+
+/*KEYBOARD*/
+#keyboard {
+  margin-top: .25rem
+}
+#keybaord div{
+  display: flex;
+}
+.kbRow {
+  /* width: 100%; */
+  /* padding: .25rem; */
+  display:flex;
+  justify-content: center;
+  margin-bottom: .2rem;
+}
+.kbKey {
+  background-color: #a7a7a7;
   color: white;
+  height: 3.55rem;
+  width: 2rem;
+  margin: .15rem;
+  border-radius: 5px;
+  border: none;
+  font-family: sans-serif;
+  font-weight: bolder;
+  text-align: center;
+  font-size: 1.25rem;
+}
+.enterKey, .backKey{
+  font-size: .6rem;
+  width: 3rem;
 }
 
-.App-link {
-  color: #61dafb;
+
+/* GUESSES */
+.GuessLine {
+  display: flex;
+  justify-content: center;
+  
+}
+.letterBox {
+  height: 3.85rem;
+  width: 3.85rem;
+  margin: .20rem;
+  animation-duration: 1s;
+}
+/* .tileCon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+.tileP {
+  /* position: relative; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .5s;
+  transform-style: preserve-3d;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tileF, .tileB {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.tileF {
+  border: 2px solid #454545;
+}
+.tileB {
+  transform: rotateX(180deg);
+}
+.GuessLine :nth-child(2) .tileP {
+  transition-delay: .35s;
+}
+.GuessLine :nth-child(3) .tileP {
+  transition-delay: .7s;
+}
+.GuessLine :nth-child(4) .tileP {
+  transition-delay: 1.05s;
+}
+.GuessLine :nth-child(5) .tileP {
+  transition-delay: 1.4s;
+}
+.GuessLine :nth-child(1).bounce {
+  animation-delay: 1.7s;
+}
+.GuessLine :nth-child(2).bounce {
+  animation-delay: 2s;
+}
+.GuessLine :nth-child(3).bounce {
+  animation-delay: 2.3s;
+}
+.GuessLine :nth-child(4).bounce {
+  animation-delay: 2.6s;
+}
+.GuessLine :nth-child(5).bounce {
+  animation-delay: 2.9s;
+}
+.bounce {
+  animation-name: bounce;
+  animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);;
+
+}
+@keyframes bounce {
+  0%   { transform: scale(1,1)      translateY(0); }
+  10%  { transform: scale(1.1,.9)   translateY(0); }
+  30%  { transform: scale(.9,1.1)   translateY(-25px); }
+  50%  { transform: scale(1.05,.95) translateY(0); }
+  57%  { transform: scale(1,1)      translateY(-7px); }
+  64%  { transform: scale(1,1)      translateY(0); }
+  100% { transform: scale(1,1)      translateY(0); }
+}
+.shake {
+  animation: horizontal-shaking 0.25s;
+}
+@keyframes horizontal-shaking {
+  0% { transform: translateX(0) }
+  25% { transform: translateX(5px) }
+  50% { transform: translateX(-5px) }
+  75% { transform: translateX(5px) }
+  100% { transform: translateX(0) }
+ }
+.flipper {
+  transform:  rotateX(180deg);
+}
+
+/* BS MODAL */
+.modal-content {
+  color: white;
+  background-color: #242424;
+  text-align: start;
+  min-width: 360px;
+}
+.modal-header { 
+  border: none;
+  /* flex-direction: column;
+  align-items: flex-start; */
+}
+.btn-close{
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+/* OPTIONS MODAL  */
+.optionsLine {
+  display: flex;
+  justify-content: space-between;
+}
+.toggleLabel {
+  position: relative;
+  display: inline-block;
+  width: 2.5rem;
+  height: 1.25rem;
+}
+.toggleInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggleSpan {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #2c3e50;
+  transition: 0.3s;
+  border-radius: 30px;
+}
+.toggleSpan:before {
+  position: absolute;
+  content: "";
+  height: 1rem;
+  width: 1rem;
+  left: 3px;
+  bottom: 2.6px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggleInput:checked + .toggleSpan {
+  background-color: #f5793a;
+  /* background-color: #1e8326; */
+}
+
+.toggleInput:checked + .toggleSpan:before {
+  transform: translateX(1.2rem);
+}
+
+/* HOW TO MODAL */
+.ExampleLine {
+  display: flex;
+}
+
+/* STATS MODAL */
+.statsBody {
+  display: flex;
+  flex-direction: column;
+  min-width: 350px;
+  /* height: 20em; */
+  /* margin-bottom: 5em; */
+  /* align-items: center; */
+  /* padding: 4em 0; */
+}
+.statsCon {
+  display: flex; 
+  flex-direction: column;
+}
+.statsCon div:nth-child(1) span{
+  margin-left: 2rem;
+}
+.statsBox {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  /* margin: auto; */
+}
+.statSlot{
+  /* margin: 0 1rem; */
+  width: 5rem;
+  text-align: center;
+  /* height: 3rem; */
+}
+.statSlot p {
+  margin: 0;
+}
+.statSlot :nth-child(1) {
+  font-size: 2rem;
+}
+.statSlot :nth-child(2) {
+  font-size: .75rem;
+}
+.graphBox {
+  margin: 1rem 0;
+  width:16.25rem;
+  display: flex;
+  flex-direction: column;
+}
+.graphLine {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  margin: 5px 0;
+  height: .75rem;
+  font-size: .75rem;
+}
+.graphLabel {
+  /* font-size: .75rem; */
+  margin-right: .5rem;
+}
+.graphBar {
+  padding-right: .35rem;
+  background-color: #454545;
+  text-align: end;
+}
+.shareButton {
+  margin: auto;
+  width: 8em;
+  height: 2em;
+  color: white;
+  background-color: #7bc0ee;
+  border: none;
+  border-radius: 15px;
+  font-family:var(--bs-font-sans-serif);
+}
+.shareButton span {
+  margin-right: 3px;
+}
+
+@media only screen and (min-width: 450px) {
+.statsBody {
+  /* width: 20rem; */
+  margin: auto;
+}
+.statsBox {
+  justify-content: center;
+}
+.statsCon div:nth-child(1) span{
+  margin-left: 1rem;
+}
+.graphBox {
+  margin: 1rem auto;
+}
 }
