@@ -177,7 +177,7 @@ function App() {
     const guesses = win ? guessNum : 0
     let uniGraph = `WordAlso ${guesses}/6\n\n`
     //copy results to the clipboard to share on social media
-    // if (!play) {
+    if (!play) {
 
       // const rainbow = `\u{1f308}`
       const green = `\u{1F7E9}`
@@ -187,8 +187,6 @@ function App() {
       const black = `\u{2B1B}`
       const key: {[index:number]: string} = {
         0: black,
-        // 1: red,
-        // 2: blue 
         1: contrast ? red : green,
         2: contrast ? blue : yellow
       }
@@ -198,7 +196,7 @@ function App() {
         uniGraph = uniGraph + uniRow + `\n`
       })
       navigator?.clipboard.writeText(uniGraph)
-    // }
+    }
 
   }
   
