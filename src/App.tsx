@@ -24,9 +24,9 @@ function App() {
   //@ts-expect-error
   useKeypress('Enter', (e)=>{ handleKeyPress('enter')})
   
-  // const [winWord, setWinWord] = useState<string>(words.answers[Math.floor(Math.random()*words.answers.length)].toUpperCase())
+  const [winWord, setWinWord] = useState<string>(words.answers[Math.floor(Math.random()*words.answers.length)].toUpperCase())
   // const [winWord, setWinWord] = useState<string>('PETAL') 
-  const [winWord, setWinWord] = useState<string>('STANK') 
+  // const [winWord, setWinWord] = useState<string>('STANK') 
 
   const [currentGuess, setCurrentGuess] = useState<string>('')
   const {guessed, setGuessed} = useGuessed() //This should probably replace PrevGuess
