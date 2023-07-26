@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import colors from "../assets/colors";
+import useGuessed from "../hooks/useGuessed";
 
 interface GuessProps {
     // currentColors: number[]
@@ -18,7 +19,7 @@ export default function Guess({currentGuess, prevGuess, winWord, guessNum, shake
     
     return (
        <div className="GuessDiv">
-        {/* <button onClick={()=>{console.log(currentColors)}}>cc</button> */}
+        {/* <button onClick={()=>{console.log(prevGuess)}}>Guess</button> */}
             {/* <button onClick={()=>{console.log(winKey)}}>k</button> */}
             {/* <button onClick={()=>{console.log(guessNum)}}>g</button> */}
             {/* <button onClick={()=>{console.log(alpha)}}>alpha</button> */}
@@ -84,7 +85,9 @@ function GuessLine ({isCurrent, line, word, winWord, reveal, bounce, shake, cont
                 code = 1
             } else
             if (wordCheck.includes(letter)) {
-                if ( winKey[letter] <= wordKey[letter] && !word.substring(0,n).includes(letter)) {
+                // console.log(letter + ' included')
+                if ((winKey[letter] <= wordKey[letter] && !word.substring(0,n).includes(letter) || !word.substring(0,n).includes(letter))) {
+                    
                     code = 2
                 }
             } 
@@ -118,8 +121,8 @@ function GuessLine ({isCurrent, line, word, winWord, reveal, bounce, shake, cont
     // ] 
 
     return (<>
-                    {/* <button onClick={()=>{console.log(wordKey)}}>1</button>
-                    <button onClick={()=>{console.log(winKey)}}>2</button> */}
+                    {/* <button onClick={()=>{console.log(wordKey)}}>1</button> */}
+                    {/* <button onClick={()=>{console.log(colorCode)}}>2</button>  */}
         <div className="GuessLine ">
 
             {[0,1,2,3,4].map(n => 

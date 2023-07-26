@@ -31,6 +31,7 @@ function Keyboard ({onPress, guessed, colorKey, contrast}: KeyboardProps) {
             // setColors(colors)
             setAlpha(alpha + guess)
         })
+        
     }, [guessed])
 
     const handleKeyPress = (event: React.MouseEvent<HTMLButtonElement>) => {

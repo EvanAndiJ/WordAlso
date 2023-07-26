@@ -5,10 +5,12 @@ import useStats from "../hooks/useStats";
 
 export default function Stats({show, hide, stats, onShare, thisGame, play, win}: StatsProps) {
     const [dist, setDist] = useState<number[]>([])
-
+    const [percent, setPercent] = useState(0)
     useEffect(()=>{
         const bars: number[] = []
-        
+        if (stats.total > 0) {
+            setPercent(Math.round(((stats.total - stats.loss) / stats.total)*100))
+        }
         if (show) {
             const most = stats.dist.reduce((a,b)=> a > b ? a : b)
             stats.dist.forEach((num, i)=>{
@@ -36,7 +38,7 @@ export default function Stats({show, hide, stats, onShare, thisGame, play, win}:
                                 <p>Played</p>
                             </div>
                             <div className='statSlot'>
-                                <p>{Math.round(((stats.total - stats.loss) / stats.total)*100)}</p>
+                                <p>{percent}</p>
                                 <p>Win %</p>
                             </div>
                             <div className='statSlot'>

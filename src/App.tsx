@@ -24,14 +24,15 @@ function App() {
   //@ts-expect-error
   useKeypress('Enter', (e)=>{ handleKeyPress('enter')})
   
-  const [winWord, setWinWord] = useState<string>(words.answers[Math.floor(Math.random()*words.answers.length)].toUpperCase())
+  // const [winWord, setWinWord] = useState<string>(words.answers[Math.floor(Math.random()*words.answers.length)].toUpperCase())
   // const [winWord, setWinWord] = useState<string>('PETAL') 
+  const [winWord, setWinWord] = useState<string>('STANK') 
 
   const [currentGuess, setCurrentGuess] = useState<string>('')
-  const [currentColors, setCurrentColors] = useState<number[]>([])
-  const [prevGuess, setPrevGuess] = useState<string[]>([])
   const {guessed, setGuessed} = useGuessed() //This should probably replace PrevGuess
-
+  const [prevGuess, setPrevGuess] = useState<string[]>([])
+  
+  const [currentColors, setCurrentColors] = useState<number[]>([])
   const [prevColors, setPrevColors] = useState<number[][]>([])
   const [kbColorKey, setKbColorKey] = useState<{[index: string]:number}>({})
   const [contrast, setContrast] = useState(true)
@@ -54,6 +55,12 @@ function App() {
   const [options, setOptions] = useState(false)
 
   useEffect(()=>{
+    // if (guessNum === 0) {
+    //   setGuessed({guessed:[]})
+    // }
+    // if (guessed) {
+    //   setPrevGuess(guessed)
+    // }
     //needed to record whole game, for sharing results
     const colors: number[] = []
     if (currentGuess) {  
@@ -84,7 +91,7 @@ function App() {
   const submitGuess = () => {
     const guess = currentGuess.toLocaleLowerCase()
     if (words.allowed.includes(guess) || words.answers.includes(guess)) {
-      // setGuessed([...guessed, currentGuess])
+      setGuessed({guessed: [...guessed.guessed, currentGuess]})
       setPrevGuess([...prevGuess, currentGuess])
       setPrevColors([...prevColors, currentColors])
       const newColors = {...kbColorKey}
@@ -175,7 +182,7 @@ function App() {
       <main>
 
          {/* <button onClick={()=>console.log(kbColorKey)}>key</button> */}
-        {/* <button onClick={()=>console.log(winWord)}>winWord</button>  */}
+        {/* <button onClick={()=>console.log(guessed)}>app</button>  */}
         <Guess 
           currentGuess={currentGuess} 
           prevGuess={prevGuess} 
