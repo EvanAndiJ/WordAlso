@@ -31,5 +31,6 @@ export interface StatsProps extends  ModalProps {
 
 export interface OptionsProps extends ModalProps {
     setContrast: ()=>void,
-    // contrast: boolean,
+    hard: boolean,
+    setHard: ()=>void,
 }

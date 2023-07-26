@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import colors from "../assets/colors";
-import useGuessed from "../hooks/useGuessed";
 
 interface GuessProps {
     // currentColors: number[]
@@ -86,7 +85,7 @@ function GuessLine ({isCurrent, line, word, winWord, reveal, bounce, shake, cont
             } else
             if (wordCheck.includes(letter)) {
                 // console.log(letter + ' included')
-                if ((winKey[letter] <= wordKey[letter] && !word.substring(0,n).includes(letter) || !word.substring(0,n).includes(letter))) {
+                if ((winKey[letter] <= wordKey[letter] && !word.substring(0,n).includes(letter)) || !word.substring(0,n).includes(letter)) {
                     
                     code = 2
                 }

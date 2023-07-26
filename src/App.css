@@ -313,7 +313,7 @@ hr {
   width: 8em;
   height: 2em;
   color: white;
-  background-color: #7bc0ee;
+  
   border: none;
   border-radius: 15px;
   font-family:var(--bs-font-sans-serif);
@@ -335,5 +335,9 @@ hr {
 }
 .graphBox {
   margin: 1rem auto;
+}
+
+.toggleSpan:before {
+  bottom: 1.9px;
 }
 }

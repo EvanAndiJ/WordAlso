@@ -3,9 +3,12 @@ import { StatsObj, StatsProps } from "../types";
 import { Modal } from "react-bootstrap";
 import useStats from "../hooks/useStats";
 
-export default function Stats({show, hide, stats, onShare, thisGame, play, win}: StatsProps) {
+export default function Stats({show, hide, stats, onShare, thisGame, play, win, contrast}: StatsProps) {
     const [dist, setDist] = useState<number[]>([])
     const [percent, setPercent] = useState(0)
+    const shareStyle = {
+        backgroundColor: contrast ?'#7bc0ee' : `#1e8326`
+    }
     useEffect(()=>{
         const bars: number[] = []
         if (stats.total > 0) {
@@ -57,12 +60,12 @@ export default function Stats({show, hide, stats, onShare, thisGame, play, win}:
                         <div key={`graphline${num}`} className='graphLine'>
                             <div className='graphLabel'>{num+1}</div>
                             <div id={`graphBar${num}`} className='graphBar'
-                                style={{width:`${dist[num]}%`, backgroundColor: (win && num === thisGame-1) ? '#e26060' : '#454545'}}>
+                                style={{width:`${dist[num]}%`, backgroundColor: (win && num === thisGame-1) ? shareStyle.backgroundColor : '#454545'}}>
                                     {stats.dist[num]}</div>
                         </div>
                         )}
                     </div>
-                    <button onClick={onShare} className='shareButton'>
+                    <button onClick={onShare} className='shareButton' style={shareStyle}>
                         <span>Share</span>
                         <img src="share-fill-white.svg" alt="Share"/>
                     </button>
