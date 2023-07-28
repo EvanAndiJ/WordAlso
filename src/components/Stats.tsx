@@ -1,3 +1,4 @@
+import shareIcon from '../img/share-fill-white.svg'
 import React, { useState, useEffect } from "react";
 import { StatsObj, StatsProps } from "../types";
 import { Modal } from "react-bootstrap";
@@ -67,7 +68,7 @@ export default function Stats({show, hide, stats, onShare, thisGame, play, win, 
                     </div>
                     <button onClick={onShare} className='shareButton' style={shareStyle}>
                         <span>Share</span>
-                        <img src="share-fill-white.svg" alt="Share"/>
+                        <img src={shareIcon} alt="Share"/>
                     </button>
 
             </div>

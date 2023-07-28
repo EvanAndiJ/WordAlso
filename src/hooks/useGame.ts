@@ -9,6 +9,7 @@ const useGame = () => {
         kb: {}, 
         prevColors: [], 
         hard: false,
+        hardReq: [],
         contrast: false,
     }
 

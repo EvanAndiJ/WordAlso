@@ -1,4 +1,7 @@
 import logo from './logo.svg';
+import howToIcon from './img/question-circle-white.svg'
+import gearIcon from './img/gear-fill-white.svg'
+import statsIcon from './img/bar-chart-fill-white.svg'
 import './App.css';
 import words from './assets/words'
 import React, {useState, useEffect} from 'react';
@@ -13,7 +16,8 @@ import Keyboard from './components/Keyboard';
 import HowTo from './components/HowTo';
 import Stats from './components/Stats';
 import Options from './components/Options';
-import { stringify } from 'querystring';
+//@ts-ignore
+import Alert from './components/Alert';
 
 
 function App() {
@@ -36,12 +40,13 @@ function App() {
   const [kbColorKey, setKbColorKey] = useState<{[index: string]:number}>({})
   
 
-  const [guessNum, setGuessNum] = useState(0)
-  const [shake, setShake] = useState(false)
-  const [play, setPlay] = useState(true)
-  const [win, setWin] = useState(false)
+  const [guessNum, setGuessNum] = useState<number>(0)
+  const [shake, setShake] = useState<boolean>(false)
+  const [play, setPlay] = useState<boolean>(true)
+  const [win, setWin] = useState<boolean>(false)
   
-  const [hard, setHard] = useState(false)
+  const [hard, setHard] = useState<boolean>(false)
+  const [hardReq, setHardReq] = useState<string[]>([])
   const toggleHard = () => {
     setGame({...game, hard: !hard})
     setHard(!hard)
@@ -54,10 +59,19 @@ function App() {
 
   const {stats, setStats} = useStats()
   const [showStats, setShowStats] = useState(false)
-  // CHANGE HOW TO BACK TO TRUE INITIAL STATE
-  const [howTo, setHowTo] = useState(true)
-  const [options, setOptions] = useState(false)
+  const [showHowTo, setShowHowTo] = useState(true)
+  const [showOptions, setShowOptions] = useState(false)
 
+  const [alert, setAlert] = useState('')
+  const [showAlert, setShowAlert] = useState(false)
+  const toggleAlert = (alert: string) => {
+    setAlert(alert)
+    setShowAlert(true)
+    setTimeout(()=>{
+      setShowAlert(false)
+      setAlert('')
+    }, 800)
+  }
   useEffect(()=>{
     if (winWord === 'start') {
       const win = words.answers[game.id].toUpperCase()
@@ -73,7 +87,6 @@ function App() {
         setWin(true)
       }
     }
-    
     //needed to record whole game, for sharing results
     const colors: number[] = []
     if (currentGuess) {  
@@ -93,71 +106,93 @@ function App() {
   },[currentGuess])
 
   const toggleHowTo = () => {
-    setHowTo(!howTo)
+    setShowHowTo(!showHowTo)
   }
   const toggleStats = () => {
     setShowStats(!showStats)
   }
   const toggleOptions = () => {
-    setOptions(!options)
+    setShowOptions(!showOptions)
   }
   const submitGuess = () => {
     const guess = currentGuess.toLocaleLowerCase()
 
-    if (words.allowed.includes(guess) || words.answers.includes(guess)) {
-
-      setPrevGuess([...prevGuess, currentGuess])
-      setPrevColors([...prevColors, currentColors])
-
-      const newColors = {...kbColorKey}
-      currentGuess.split('').forEach((letter, i) => {
-        if (!(letter in newColors) || newColors[letter] != 1) { 
-          newColors[letter] = currentColors[i] 
-        }
-      })
-
-      setGame({
-        words: [...game.words, currentGuess], 
-        kb: newColors, 
-        id: game.id, 
-        prevColors:[...prevColors, currentColors], 
-        contrast: contrast,
-        hard: hard,
-      })
-      setTimeout(()=>{setKbColorKey(newColors)}, 2500)
-
-      let g = guessNum+1
-      setGuessNum(g)
-
-      const isWin = currentGuess === winWord
-      if (isWin || g === 6) { 
-        
-        setPlay(false)
-        let newStats = stats
-        newStats.total += 1
-        if (isWin) { setWin(true) }
-
-
-        if (g === 6 && !isWin) {
-          newStats.loss = newStats.loss + 1
-          newStats.current = 0
-        } else {
-          newStats.current += 1
-          newStats.dist[g-1] = newStats.dist[g-1] + 1
-        }
-        if (newStats.current > newStats.max) { newStats.max = newStats.current }
-
-        setStats(newStats)
-        setTimeout(()=>setShowStats(true), isWin ? 3600 : 1700)
-      }  
-      
-      setCurrentGuess('')
-      setCurrentColors([])
-    } 
-    else {
+    if (!words.allowed.includes(guess) && !words.answers.includes(guess)) { 
       setShake(true)
       setTimeout(()=>setShake(false), 1)
+      toggleAlert('Not in word List')
+      return
+    } 
+
+    if (hard) {
+      const check = currentGuess.split('')
+      for (let i=0, len=hardReq.length; i < len; i++) {
+        const letter = hardReq[i]
+        if (check.includes(letter)) {
+          check.splice(check.indexOf(letter),1)
+        } else {
+          setShake(true)
+          setTimeout(()=>setShake(false), 1)
+          toggleAlert(`Word must contain ${letter}`)
+          return
+        }
+      }
     }
+
+    const newColors = {...kbColorKey}
+    const newReq: string[] = []
+    currentGuess.split('').forEach((letter, i) => {
+      if (!(letter in newColors) || newColors[letter] != 1) { 
+        newColors[letter] = currentColors[i] 
+      }
+      if (newColors[letter] > 0) {
+        newReq.push(letter)
+      }
+    })
+
+    
+
+    setPrevGuess([...prevGuess, currentGuess])
+    setPrevColors([...prevColors, currentColors])
+    setGame({
+      words: [...game.words, currentGuess], 
+      kb: newColors, 
+      id: game.id, 
+      prevColors:[...prevColors, currentColors], 
+      contrast: contrast,
+      hard: hard,
+      hardReq: newReq,
+    })
+    setHardReq(newReq)
+    setTimeout(()=>{setKbColorKey(newColors)}, 2500)
+
+    let g = guessNum+1
+    setGuessNum(g)
+
+    const isWin = currentGuess === winWord
+    if (isWin || g === 6) { 
+      
+      setPlay(false)
+      toggleAlert(`end${g}`)
+      let newStats = stats
+      newStats.total += 1
+      if (isWin) { setWin(true) }
+
+      if (g === 6 && !isWin) {
+        newStats.loss = newStats.loss + 1
+        newStats.current = 0
+      } else {
+        newStats.current += 1
+        newStats.dist[g-1] = newStats.dist[g-1] + 1
+      }
+      if (newStats.current > newStats.max) { newStats.max = newStats.current }
+
+      setStats(newStats)
+      setTimeout(()=>setShowStats(true), isWin ? 3600 : 1700)
+    }  
+    
+    setCurrentGuess('')
+    setCurrentColors([])
   }
   const handleKeyPress = (key: string) => {
     const code = key.toLowerCase().charCodeAt(0)
@@ -200,21 +235,28 @@ function App() {
 
   }
   
-  
   return (
     <div className="App">
       <header className="App-header">
         <h1 className={'title'}>WordAlso</h1>
         <div className="headerButtonsDiv">
-          <button className="headerButtons" onClick={toggleHowTo}><img src="question-circle-white.svg" alt="How To Play"/></button>
-          <button className="headerButtons" onClick={toggleStats}><img src="bar-chart-fill-white.svg" alt="Stats"/></button>
-          <button className="headerButtons" onClick={toggleOptions}><img src="gear-fill-white.svg" alt="Optpions"/></button>
+
+          <button className="headerButtons" onClick={toggleHowTo}>
+            <img src={howToIcon} alt="How To Play"/>
+          </button>
+
+          <button className="headerButtons" onClick={toggleStats}>
+            <img src={statsIcon} alt="Stats"/>
+          </button>
+          
+          <button className="headerButtons" onClick={toggleOptions}>
+            <img src={gearIcon} alt="Options"/>
+          </button>
         </div>
       </header>
       <hr/>
       <main>
-
-        {/* <button onClick={()=>console.log(winWord)}>app</button>  */}
+        
         <Guess 
           currentGuess={currentGuess} 
           prevGuess={prevGuess} 
@@ -224,7 +266,9 @@ function App() {
           bounce={false}
           shake={shake}
           contrast={contrast}
-        />
+        >
+          <Alert show={showAlert} alert={alert} />
+        </Guess>
           
         <Keyboard 
           onPress={handleKeyPress} 
@@ -234,7 +278,7 @@ function App() {
         />
 
         <HowTo 
-          show={howTo} hide={toggleHowTo}
+          show={showHowTo} hide={toggleHowTo}
           contrast={contrast}
         />
 
@@ -243,7 +287,7 @@ function App() {
           thisGame={guessNum} play={play} win={win}
         /> 
           
-        <Options show={options} hide={toggleOptions}
+        <Options show={showOptions} hide={toggleOptions}
           setContrast={toggleContrast} contrast={contrast}
           setHard={toggleHard} hard={hard}
         />

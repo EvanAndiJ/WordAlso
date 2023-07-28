@@ -5,6 +5,8 @@ import colors from "../assets/colors";
 
 export default function Options({show, hide, contrast, setContrast, hard, setHard}: OptionsProps) {
     const colorKey: string[] = contrast ? colors.highC : colors.reg
+    const color = contrast ? '#f5793a' : '#1e8326';
+    
 
     return (
         <Modal show={show} onHide={hide}>
@@ -16,16 +18,20 @@ export default function Options({show, hide, contrast, setContrast, hard, setHar
                     <h6>High Contrast</h6>
                     <label className='toggleLabel'>
                         <input type="checkbox" className='toggleInput' checked={contrast} onChange={()=>setContrast()}/>
-                        <span className='toggleSpan'/>
+                        <span className='toggleSpan' style={{backgroundColor: contrast ? color : '#2c3e50'}}/>
                     </label>
                 </div>
-                {/* <div className="optionsLine">
-                    <h6>Hard Mode</h6>
+                <hr/>
+                <div className="optionsLine">
+                    <div>
+                        <h6>Hard Mode</h6>
+                        <p className='optionsLineDetail'>All hints must be used in subsequent guesses</p>
+                    </div>
                     <label className='toggleLabel'>
                         <input type="checkbox" className='toggleInput' checked={hard} onChange={()=>setHard()}/>
-                        <span className='toggleSpan'/>
+                        <span className='toggleSpan'  style={{backgroundColor: hard ? color : '#2c3e50'}}/>
                     </label>
-                </div> */}
+                </div>
             </Modal.Body>
         </Modal>
     )

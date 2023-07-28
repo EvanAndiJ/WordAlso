@@ -1,12 +1,31 @@
+import { ReactElement } from "react"
+import { JsxElement } from "typescript"
 
+export interface AlertProps {
+    show: boolean,
+    alert: string,
+
+}
 export interface GuessProps {
     currentGuess: string, 
-    prevGuess: string[]
+    prevGuess: string[],
+    winWord: string,
+    guessNum: number,
+    shake: boolean,
+    bounce: boolean,
+    win: boolean,
+    contrast:boolean,
+    children: ReactElement
 }
 export interface GuessLineProps {
     isCurrent: boolean,
     line: number,
     word: string,
+    winWord: string,
+    reveal: boolean,
+    shake: boolean,
+    bounce: boolean,
+    contrast:boolean,
 }
 
 export interface ModalProps {

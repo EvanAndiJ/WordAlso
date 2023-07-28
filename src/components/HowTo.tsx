@@ -51,7 +51,6 @@ function ExampleLine ({ word, color, tile, contrast}: ExampleLineProps) {
     ]
 
     return (<>
-            {/* <button onClick={()=>{setReveal(!reveal); console.log(reveal)}}> revss</button> */}
         <div className="ExampleLine">
             
             {word.split('').map((letter, n) => 

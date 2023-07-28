@@ -1,27 +1,14 @@
 import React, {useEffect, useState} from "react";
 import colors from "../assets/colors";
+import { GuessProps, GuessLineProps } from "../types";
 
-interface GuessProps {
-    // currentColors: number[]
-    // prevColors: number[][],
-    currentGuess: string, 
-    prevGuess: string[],
-    winWord: string,
-    guessNum: number,
-    shake: boolean,
-    bounce: boolean,
-    win: boolean,
-    contrast:boolean,
-}
 
-export default function Guess({currentGuess, prevGuess, winWord, guessNum, shake, win, contrast}: GuessProps) {
+
+export default function Guess({currentGuess, prevGuess, winWord, guessNum, shake, win, contrast, children}: GuessProps) {
     
     return (
        <div className="GuessDiv">
-        {/* <button onClick={()=>{console.log(prevGuess)}}>Guess</button> */}
-            {/* <button onClick={()=>{console.log(winKey)}}>k</button> */}
-            {/* <button onClick={()=>{console.log(guessNum)}}>g</button> */}
-            {/* <button onClick={()=>{console.log(alpha)}}>alpha</button> */}
+        <div className='alertDiv'>{children}</div>
            {[0,1,2,3,4,5].map(line => 
            <GuessLine 
            line={line}  key={line}
@@ -38,16 +25,7 @@ export default function Guess({currentGuess, prevGuess, winWord, guessNum, shake
        </div>
     )
 }
-interface GuessLineProps {
-    isCurrent: boolean,
-    line: number,
-    word: string,
-    winWord: string,
-    reveal: boolean,
-    shake: boolean,
-    bounce: boolean,
-    contrast:boolean,
-}
+
 function GuessLine ({isCurrent, line, word, winWord, reveal, bounce, shake, contrast}: GuessLineProps) {
     const [colorCode, setColorCode] = useState<number[]>([])
     // const [colorObj, setColorObj] = useState<{[index: string]:number}>({})
@@ -84,7 +62,6 @@ function GuessLine ({isCurrent, line, word, winWord, reveal, bounce, shake, cont
                 code = 1
             } else
             if (wordCheck.includes(letter)) {
-                // console.log(letter + ' included')
                 if ((winKey[letter] <= wordKey[letter] && !word.substring(0,n).includes(letter)) || !word.substring(0,n).includes(letter)) {
                     
                     code = 2
@@ -120,8 +97,6 @@ function GuessLine ({isCurrent, line, word, winWord, reveal, bounce, shake, cont
     // ] 
 
     return (<>
-                    {/* <button onClick={()=>{console.log(wordKey)}}>1</button> */}
-                    {/* <button onClick={()=>{console.log(colorCode)}}>2</button>  */}
         <div className="GuessLine ">
 
             {[0,1,2,3,4].map(n => 
