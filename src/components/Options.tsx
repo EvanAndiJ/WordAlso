@@ -22,6 +22,7 @@ export default function Options({show, hide, contrast, setContrast, hard, setHar
                     </label>
                 </div>
                 <hr/>
+
                 <div className="optionsLine">
                     <div>
                         <h6>Hard Mode</h6>
@@ -31,6 +32,18 @@ export default function Options({show, hide, contrast, setContrast, hard, setHar
                         <input type="checkbox" className='toggleInput' checked={hard} onChange={()=>setHard()}/>
                         <span className='toggleSpan'  style={{backgroundColor: hard ? color : '#2c3e50'}}/>
                     </label>
+                </div>
+                <hr/>
+
+                <div className='optionsLine'>
+                    <h6>Feedback</h6>
+                    <a href="mailto:EvanAndiJ@gmail.com?subject=WordAlso Feeback" title='Send Feedback to EvanAndiJ@gmail.com'>Email</a>
+                </div>
+                <hr/>
+
+                <div className='optionsLine'>
+                    <h6>Report A Bug</h6>
+                    <a href="mailto:EvanAndiJ@gmail.com?subject=WordAlso Bug Report" title='Send Bug Report to EvanAndiJ@gmail.com'>Email</a>
                 </div>
             </Modal.Body>
         </Modal>

@@ -185,8 +185,8 @@ hr {
 .alert {
   color: black;
   background-color: #e9e9e9;
-  padding:.25rem;
-  font-size: 1rem;
+  padding:.4  5rem .5rem;
+  font-size: .75rem;
   margin: 1em auto;
   z-index: 1;
   box-shadow: 1px 3px 15px 4px rgb(66, 66, 66);
@@ -218,6 +218,10 @@ hr {
 }
 .optionsLineDetail {
   font-size: .85rem;
+}
+.optionsLine a {
+  color: gray;
+  text-decoration: none;
 }
 .toggleLabel {
   position: relative;
