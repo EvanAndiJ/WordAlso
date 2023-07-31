@@ -4,12 +4,13 @@
 .check {
   border: 1px solid #e26060;
 }
+body {
+  background-color: #000;
+
+}
 .App {
   text-align: center;
-  min-height: 100vh;
-  min-width: 350px;
   color: white;
-  background-color: #000;
   position: relative;
 }
 .App-header {
@@ -356,7 +357,6 @@ hr {
 .graphBox {
   margin: 1rem auto;
 }
-
 .toggleSpan:before {
   bottom: 1.9px;
 }
