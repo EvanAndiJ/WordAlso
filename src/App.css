@@ -50,8 +50,7 @@ hr {
   display: flex;
 }
 .kbRow {
-  width: 93%;
-  /* padding: .25rem; */
+  width: 90%;
   display:flex;
   justify-content: center;
   margin-bottom: .2rem;
@@ -67,8 +66,6 @@ hr {
   border: none;
   font-family: sans-serif;
   font-weight: bolder;
-  text-align: center;
-  font-size: 1.25rem;
 }
 .enterKey, .backKey{
   font-size: .6rem;
