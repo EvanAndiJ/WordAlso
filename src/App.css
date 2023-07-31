@@ -58,8 +58,8 @@ hr {
 .kbKey {
   background-color: #a7a7a7;
   color: white;
-  height: 3.55rem;
-  width: 2rem;
+  height: 3.25rem;
+  width: 1.85rem;
   margin: .15rem;
   border-radius: 5px;
   border: none;
@@ -81,8 +81,8 @@ hr {
   
 }
 .letterBox {
-  height: 3.85rem;
-  width: 3.85rem;
+  height: 3.55rem;
+  width: 3.55rem;
   margin: .20rem;
   animation-duration: 1s;
 }
