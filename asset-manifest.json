@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/wordalso/static/css/main.7476d7fe.css",
+    "main.css": "/wordalso/static/css/main.333970eb.css",
     "main.js": "/wordalso/static/js/main.9d2b662c.js",
     "static/js/787.899534d7.chunk.js": "/wordalso/static/js/787.899534d7.chunk.js",
     "index.html": "/wordalso/index.html",
@@ -8,12 +8,12 @@
     "static/media/question-circle-white.svg": "/wordalso/static/media/question-circle-white.0e4b4d1f552ea28831374cf43ea453b8.svg",
     "static/media/bar-chart-fill-white.svg": "/wordalso/static/media/bar-chart-fill-white.3eb3ae87d619c384ff2756f4bd820308.svg",
     "static/media/share-fill-white.svg": "/wordalso/static/media/share-fill-white.f6a77eab54e85edec9d3a7df5a1dbf57.svg",
-    "main.7476d7fe.css.map": "/wordalso/static/css/main.7476d7fe.css.map",
+    "main.333970eb.css.map": "/wordalso/static/css/main.333970eb.css.map",
     "main.9d2b662c.js.map": "/wordalso/static/js/main.9d2b662c.js.map",
     "787.899534d7.chunk.js.map": "/wordalso/static/js/787.899534d7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7476d7fe.css",
+    "static/css/main.333970eb.css",
     "static/js/main.9d2b662c.js"
   ]
 }
