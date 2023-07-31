@@ -49,11 +49,12 @@ hr {
   display: flex;
 }
 .kbRow {
-  /* width: 100%; */
+  width: 93%;
   /* padding: .25rem; */
   display:flex;
   justify-content: center;
   margin-bottom: .2rem;
+  margin: auto;
 }
 .kbKey {
   background-color: #a7a7a7;
